@@ -102,6 +102,8 @@ lvim.keys.visual_mode["<C-j>"] = ":m'>+1<CR>gv=gv"
 lvim.keys.visual_mode["<C-k>"] = ":m'<-2<CR>gv=gv"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<C-h>"] = ":BufferLineMovePrev<CR>"
+lvim.keys.normal_mode["<C-l>"] = ":BufferLineMoveNext<CR>"
 -- lvim.keys.normal_mode["<CR>"] = ":BufferLineGroupToggle<CR>"
 
 -- TODO: User Config for predefined plugins
