@@ -15,7 +15,6 @@ lvim.plugins = {
     -- "github/copilot.vim",
   },
   {
-    "catppuccin/nvim", as = "catppuccin",
     "rebelot/kanagawa.nvim"
   }
 }
@@ -26,41 +25,32 @@ vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
 -- vim.g.catppuccin_flavour = "macchiato"
+-- eslint - disable - next - line
 
-require "bufferline".setup {
+-- local bufferline = require "lvim.core.bufferline"
+-- bufferline.setup {
 
-  options = {
-    -- mode = "tabs"
-    groups = {
-      options = {
-        toggle_hidden_on_enter = true
-      },
-      items = {
-        {
-          name = "JSX", -- Mandatory
-          highlight = { gui = "underline", guisp = "#9FA5C0" }, -- Optional
-          priority = 2, -- determines where it will appear relative to other groups (Optional)
-          -- icon = "", -- Optional
-          matcher = function(buf) -- Mandatory
-            return buf.filename:match('%.jsx') or buf.filename:match('%_spec')
-          end,
-        },
-        {
-          name = "Docs",
-          highlight = { gui = "undercurl", guisp = "green" },
-          auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-          matcher = function(buf)
-            return buf.filename:match('%.md') or buf.filename:match('%.txt')
-          end,
-          separator = { -- Optional
-            style = require('bufferline.groups').separator.tab
-          },
-        }
-      }
-    }
+--   options = {
+--     groups = {
+--       options = {
+--         toggle_hidden_on_enter = true
+--       },
+--       items = {
+--         {
+--           name = "JSX", -- Mandatory
+--           highlight = { undercurl = false, guisp = "#9FA5C0" }, -- Optional
+--           auto_close = false,
+--           priority = 2, -- determines where it will appear relative to other groups (Optional)
+--           -- icon = "", -- Optional
+--           matcher = function(buf) -- Mandatory
+--             return buf.filename:match('%.jsx') or buf.filename:match('%_spec')
+--           end,
+--         }
+--       }
+--     }
 
-  }
-}
+--   }
+-- }
 
 -- Prettier configuration
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -110,6 +100,9 @@ lvim.keys.normal_mode["<C-j>"] = ":m.+1<CR>"
 lvim.keys.normal_mode["<C-k>"] = ":m.-2<CR>"
 lvim.keys.visual_mode["<C-j>"] = ":m'>+1<CR>gv=gv"
 lvim.keys.visual_mode["<C-k>"] = ":m'<-2<CR>gv=gv"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+-- lvim.keys.normal_mode["<CR>"] = ":BufferLineGroupToggle<CR>"
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
