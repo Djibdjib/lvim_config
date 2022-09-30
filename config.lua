@@ -1,12 +1,12 @@
 --[[
 lvim is the global options object
-
 Linters should be
 filled in as strings with either
 a global executable or a path to
 an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+lvim.lsp.automatic_servers_installation = true
 
 lvim.plugins = {
   { "lunarvim/colorschemes" },
@@ -15,30 +15,68 @@ lvim.plugins = {
     -- "github/copilot.vim",
   },
   {
-    "catppuccin/nvim", as = "catppuccin"
+    "catppuccin/nvim", as = "catppuccin",
+    "rebelot/kanagawa.nvim"
   }
 }
 
 vim.opt.showtabline = 2
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
+vim.opt.background = "dark"
 
-vim.g.catppuccin_flavour = "macchiato"
+-- vim.g.catppuccin_flavour = "macchiato"
+
+require "bufferline".setup {
+
+  options = {
+    -- mode = "tabs"
+    groups = {
+      options = {
+        toggle_hidden_on_enter = true
+      },
+      items = {
+        {
+          name = "JSX", -- Mandatory
+          highlight = { gui = "underline", guisp = "#9FA5C0" }, -- Optional
+          priority = 2, -- determines where it will appear relative to other groups (Optional)
+          -- icon = "", -- Optional
+          matcher = function(buf) -- Mandatory
+            return buf.filename:match('%.jsx') or buf.filename:match('%_spec')
+          end,
+        },
+        {
+          name = "Docs",
+          highlight = { gui = "undercurl", guisp = "green" },
+          auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+          matcher = function(buf)
+            return buf.filename:match('%.md') or buf.filename:match('%.txt')
+          end,
+          separator = { -- Optional
+            style = require('bufferline.groups').separator.tab
+          },
+        }
+      }
+    }
+
+  }
+}
 
 -- Prettier configuration
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
     command = "prettier",
-    filetypes = {
-      "javascriptreact",
-      "javascript",
-      "typescriptreact",
-      "typescript",
-      "json",
-      "markdown",
-      "css"
-    },
+    -- filetypes = {
+    --   "javascriptreact",
+    --   "javascript",
+    --   "typescriptreact",
+    --   "typescript",
+    --   "json",
+    --   "markdown",
+    --   "css",
+    --   "php"
+    -- },
   },
 }
 
@@ -60,7 +98,8 @@ linters.setup {
 -- generalP
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "kanagawa"
+lvim.transparent_window = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -95,6 +134,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "php"
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
