@@ -24,9 +24,6 @@ vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
--- vim.g.catppuccin_flavour = "macchiato"
--- eslint - disable - next - line
-
 -- local bufferline = require "lvim.core.bufferline"
 -- bufferline.setup {
 
@@ -105,6 +102,8 @@ lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<C-h>"] = ":BufferLineMovePrev<CR>"
 lvim.keys.normal_mode["<C-l>"] = ":BufferLineMoveNext<CR>"
 -- lvim.keys.normal_mode["<CR>"] = ":BufferLineGroupToggle<CR>"
+lvim.keys.normal_mode["|"] = ":vsplit<CR>"
+lvim.keys.normal_mode["-"] = ":split<CR>"
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
