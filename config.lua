@@ -15,15 +15,23 @@ lvim.plugins = {
     -- "github/copilot.vim",
   },
   {
-    "rebelot/kanagawa.nvim"
+    "rebelot/kanagawa.nvim",
+    "folke/tokyonight.nvim",
+    "nxvu699134/vn-night.nvim",
   }
 }
+
+require("luasnip/loaders/from_vscode").load { paths = { "~/.config/lvim/snippets/vscode-es7-javascript-react-snippets" } }
 
 vim.opt.showtabline = 2
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+vim.opt.cursorline = true
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*" },
+  command = "highlight CursorLine guibg=#3B3636 guifg=fg",
+})
 -- local bufferline = require "lvim.core.bufferline"
 -- bufferline.setup {
 
@@ -83,10 +91,25 @@ linters.setup {
 }
 
 -- generalP
+-- lvim.builtin.lualine.style = "none"
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "kanagawa"
+-- lvim.colorscheme = "kanagawa"
+-- lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "vn-night"
 lvim.transparent_window = true
+
+-- local custom_vnnight = require "lualine.themes.vn-night"
+
+-- require("tokyonight").setup({
+--   style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+--   light_style = "day",
+--   terminal_colors = true,
+--   transparent = false,
+--   styles = {
+--     comments = { italic = true }
+--   }
+-- })
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -112,6 +135,7 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
+
 -- lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
@@ -128,7 +152,6 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
-  "php"
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
