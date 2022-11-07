@@ -32,6 +32,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "*" },
   command = "highlight CursorLine guibg=#3B3636 guifg=fg",
 })
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = { "*.js", "*.jsx" },
+  command = "silent loadview"
+})
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  pattern = { "*.js", "*.jsx" },
+  command = "silent mkview"
+})
+
 -- local bufferline = require "lvim.core.bufferline"
 -- bufferline.setup {
 
