@@ -32,6 +32,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "*" },
   command = "highlight CursorLine guibg=#3B3636 guifg=fg",
 })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*" },
+  command = "highlight Folded guibg=#000000 guifg=fg",
+})
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*.js", "*.jsx" },
   command = "silent loadview"
@@ -133,6 +137,7 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<C-h>"] = ":BufferLineMovePrev<CR>"
 lvim.keys.normal_mode["<C-l>"] = ":BufferLineMoveNext<CR>"
+lvim.keys.normal_mode["<C-g>"] = "vaBzf"
 -- lvim.keys.normal_mode["<CR>"] = ":BufferLineGroupToggle<CR>"
 lvim.keys.normal_mode["|"] = ":vsplit<CR>"
 lvim.keys.normal_mode["-"] = ":split<CR>"
