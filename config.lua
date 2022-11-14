@@ -7,7 +7,6 @@ lvim.plugins = {
     "tpope/vim-surround"
   },
   {
-    "rebelot/kanagawa.nvim",
     "nxvu699134/vn-night.nvim",
   },
   {
@@ -21,6 +20,20 @@ lvim.plugins = {
       }
     end,
   },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require('goto-preview').setup {}
+    end
+  },
+  -- {
+  --   "norcalli/nvim-colorizer.lua",
+  --   config = function()
+  --     require('nvim-colorizer').setup {
+  --       'css', 'javascript', 'javascriptreact'
+  --     }
+  --   end
+  -- }
 }
 
 lvim.builtin.which_key.mappings["S"] = {
@@ -56,12 +69,6 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
   command = "silent mkview"
 })
 
--- vim.api.nvim_create_autocmd("TermEnter", {
---   pattern = { "*" },
---   command = "tnoremap <silent><C-t><Cmd>exe v:count1 ToggleTerm<CR>"
--- })
-
-
 -- Prettier configuration
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -86,27 +93,11 @@ linters.setup {
 }
 
 -- generalP
--- lvim.builtin.lualine.style = "none"
 lvim.log.level = "warn"
 lvim.format_on_save = true
--- lvim.colorscheme = "kanagawa"
--- lvim.colorscheme = "tokyonight"
 lvim.colorscheme = "vn-night"
 lvim.transparent_window = true
 
--- local custom_vnnight = require "lualine.themes.vn-night"
-
--- require("tokyonight").setup({
---   style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
---   light_style = "day",
---   terminal_colors = true,
---   transparent = false,
---   styles = {
---     comments = { italic = true }
---   }
--- })
-
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
@@ -124,6 +115,11 @@ lvim.keys.normal_mode["<C-g>"] = "$vaBzf"
 lvim.keys.normal_mode["|"] = ":vsplit<CR>"
 lvim.keys.normal_mode["-"] = ":split<CR>"
 
+lvim.keys.normal_mode["gpd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", noremap = true }
+lvim.keys.normal_mode["gpt"] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", noremap = true }
+lvim.keys.normal_mode["gpi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap = true }
+lvim.keys.normal_mode["gpr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap = true }
+lvim.keys.normal_mode["gP"] = { "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap = true }
 -- lvim.keys.normal_mode["<C-t>"] = ":ToggleTerm<CR>";
 -- lvim.keys.normal_mode["<C-t>"] = ":help<CR>";
 
