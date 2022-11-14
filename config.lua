@@ -43,6 +43,7 @@ lvim.builtin.which_key.mappings["S"] = {
   Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
 
+vim.opt.timeoutlen = 100
 vim.opt.showtabline = 2
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
