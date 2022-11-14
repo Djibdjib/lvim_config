@@ -1,11 +1,3 @@
---[[
-lvim is the global options object
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 lvim.lsp.automatic_servers_installation = true
 
 lvim.plugins = {
@@ -16,12 +8,11 @@ lvim.plugins = {
   },
   {
     "rebelot/kanagawa.nvim",
-    "folke/tokyonight.nvim",
     "nxvu699134/vn-night.nvim",
   },
   {
     "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    event = "BufReadPre",
     module = "persistence",
     config = function()
       require("persistence").setup {
@@ -64,6 +55,12 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
   pattern = { "*.js", "*.jsx" },
   command = "silent mkview"
 })
+
+-- vim.api.nvim_create_autocmd("TermEnter", {
+--   pattern = { "*" },
+--   command = "tnoremap <silent><C-t><Cmd>exe v:count1 ToggleTerm<CR>"
+-- })
+
 
 -- Prettier configuration
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -127,12 +124,17 @@ lvim.keys.normal_mode["<C-g>"] = "$vaBzf"
 lvim.keys.normal_mode["|"] = ":vsplit<CR>"
 lvim.keys.normal_mode["-"] = ":split<CR>"
 
+-- lvim.keys.normal_mode["<C-t>"] = ":ToggleTerm<CR>";
+-- lvim.keys.normal_mode["<C-t>"] = ":help<CR>";
+
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
+
 lvim.builtin.terminal.active = true
+lvim.builtin.terminal.open_mapping = "<C-t>"
+
 lvim.builtin.nvimtree.setup.view.side = "left"
 
 -- lvim.builtin.nvimtree.show_icons.git = 0
