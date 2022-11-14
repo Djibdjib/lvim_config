@@ -118,7 +118,6 @@ lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<C-h>"] = ":BufferLineMovePrev<CR>"
 lvim.keys.normal_mode["<C-l>"] = ":BufferLineMoveNext<CR>"
 lvim.keys.normal_mode["<C-g>"] = "$vaBzf"
--- lvim.keys.normal_mode["<CR>"] = ":BufferLineGroupToggle<CR>"
 lvim.keys.normal_mode["|"] = ":vsplit<CR>"
 lvim.keys.normal_mode["-"] = ":split<CR>"
 
@@ -127,11 +126,7 @@ lvim.keys.normal_mode["gpt"] = { "<cmd>lua require('goto-preview').goto_preview_
 lvim.keys.normal_mode["gpi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap = true }
 lvim.keys.normal_mode["gpr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap = true }
 lvim.keys.normal_mode["gP"] = { "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap = true }
--- lvim.keys.normal_mode["<C-t>"] = ":ToggleTerm<CR>";
--- lvim.keys.normal_mode["<C-t>"] = ":help<CR>";
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 
@@ -142,7 +137,6 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 
 -- lvim.builtin.nvimtree.show_icons.git = 0
 
--- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
