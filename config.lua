@@ -46,6 +46,13 @@ lvim.plugins = {
       require('symbols-outline').setup()
     end
   },
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
 }
 
 lvim.builtin.which_key.mappings["S"] = {
@@ -55,9 +62,22 @@ lvim.builtin.which_key.mappings["S"] = {
   Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
 
-lvim.builtin.which_key.mappings["C"] = {
+-- CUSTOM MENU
+lvim.builtin.which_key.mappings["n"] = {
   name = "Custom",
   o = { ":SymbolsOutline<cr>", "Toggle SymbolsOutline" },
+}
+
+-- PERF
+-- TODO
+-- NOTE
+-- FIX
+-- WARNING
+lvim.builtin.which_key.mappings["nt"] = {
+  name = "TODO",
+  q = { ":TodoQuickFix<cr>", "TODO QuickFix" },
+  n = { "<cmd>lua require('todo-comments').jump_next()<cr>", "Jump to Next TODO" },
+  p = { "<cmd>lua require('todo-comments').jump_prev()<cr>", "Jump to Prev TODO" },
 }
 
 vim.opt.timeoutlen = 100
@@ -67,7 +87,7 @@ vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.numberwidth = 8
+vim.opt.numberwidth = 4
 vim.opt.signcolumn = "yes"
 
 vim.api.nvim_create_autocmd("BufEnter", {
