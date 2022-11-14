@@ -53,6 +53,10 @@ lvim.plugins = {
       require("todo-comments").setup()
     end,
   },
+  {
+    "ggandor/lightspeed.nvim",
+    event = "BufRead",
+  },
 }
 
 lvim.builtin.which_key.mappings["S"] = {
