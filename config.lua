@@ -11,22 +11,42 @@ lvim.lsp.automatic_servers_installation = true
 lvim.plugins = {
   { "lunarvim/colorschemes" },
   {
-    "prettier/vim-prettier"
-    -- "github/copilot.vim",
+    "prettier/vim-prettier",
+    "tpope/vim-surround"
   },
   {
     "rebelot/kanagawa.nvim",
     "folke/tokyonight.nvim",
     "nxvu699134/vn-night.nvim",
-  }
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    module = "persistence",
+    config = function()
+      require("persistence").setup {
+        dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+        options = { "buffers", "curdir", "tabpages", "winsize" },
+      }
+    end,
+  },
 }
 
-require("luasnip/loaders/from_vscode").load { paths = { "~/.config/lvim/snippets/vscode-es7-javascript-react-snippets" } }
+lvim.builtin.which_key.mappings["S"] = {
+  name = "Session",
+  c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+  l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+  Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+}
 
 vim.opt.showtabline = 2
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 8
+vim.opt.signcolumn = "yes"
 
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "*" },
@@ -45,46 +65,11 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
   command = "silent mkview"
 })
 
--- local bufferline = require "lvim.core.bufferline"
--- bufferline.setup {
-
---   options = {
---     groups = {
---       options = {
---         toggle_hidden_on_enter = true
---       },
---       items = {
---         {
---           name = "JSX", -- Mandatory
---           highlight = { undercurl = false, guisp = "#9FA5C0" }, -- Optional
---           auto_close = false,
---           priority = 2, -- determines where it will appear relative to other groups (Optional)
---           -- icon = "", -- Optional
---           matcher = function(buf) -- Mandatory
---             return buf.filename:match('%.jsx') or buf.filename:match('%_spec')
---           end,
---         }
---       }
---     }
-
---   }
--- }
-
 -- Prettier configuration
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
     command = "prettier",
-    -- filetypes = {
-    --   "javascriptreact",
-    --   "javascript",
-    --   "typescriptreact",
-    --   "typescript",
-    --   "json",
-    --   "markdown",
-    --   "css",
-    --   "php"
-    -- },
   },
 }
 
